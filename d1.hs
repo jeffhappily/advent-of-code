@@ -43,7 +43,9 @@ findPairWithSumFromTo expected fromI toI xs = go fromI toI
 -- | Find a pair in a (sorted) list that adds up to 'expected' by simply
 -- traversing from both ends of the list to find a match until both pointers
 -- meet, returns 'Nothing' if not found
-findPairWithSum :: Int -> Vector Int -> Maybe (Int, Int)
+findPairWithSum :: Int        -- ^ Expected sum
+                -> Vector Int -- ^ Target vector
+                -> Maybe (Int, Int)
 findPairWithSum expected xs = findPairWithSumFromTo expected 0 (V.length xs - 1) xs
 
 -- | Find a pair (two numbers) in a list that adds up to 2020
@@ -56,9 +58,9 @@ part1 = findPairWithSum 2020
 part2 :: Vector Int -> Maybe (Int, Int, Int)
 part2 xs = V.ifoldr 
             (\i a b -> case b of 
-              Nothing -> case findPairWithSumFromTo (2020 - a) 0 (i - 1) xs of
-                Just (y, z) -> Just (a, y, z)
-                Nothing -> Nothing
+              Nothing ->
+                    (\(y, z) -> (a, y, z))
+                <$> findPairWithSumFromTo (2020 - a) 0 (i - 1) xs
               Just c -> Just c)
             Nothing
             xs
