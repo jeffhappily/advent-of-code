@@ -15,9 +15,10 @@ main = do
     Just (x, y, z) -> putStrLn $ "Found! The three number is " <> show x <> " & " <> show y <>" & " <> show z <>  ", and their product is " <> show (x * y * z)
 
 
--- | Find a pair in a (sorted) list within a given range that adds up to 'expected'
--- by simply traversing simultaneously from both the 'fromI' and 'toI' index to find
--- a match until both pointers meet, returns 'Nothing' if not found.
+-- | Find a pair (two numbers) in a (sorted) list within a given range that
+-- adds up to 'expected' by simply traversing simultaneously from both the
+-- 'fromI' and 'toI' index towards middle to find a match until both
+-- pointers meet, returns 'Nothing' if not found.
 findPairWithSumFromTo :: Int        -- ^ Expected sum
                       -> Int        -- ^ From index
                       -> Int        -- ^ To index
@@ -40,9 +41,9 @@ findPairWithSumFromTo expected fromI toI xs = go fromI toI
     getVal :: Int -> Int
     getVal = (V.!) xs
 
--- | Find a pair in a (sorted) list that adds up to 'expected' by simply
--- traversing from both ends of the list to find a match until both pointers
--- meet, returns 'Nothing' if not found
+-- | Find a pair (two numbers) in a (sorted) list that adds up to 'expected' by
+-- simply traversing from both ends of the list towards middle to find a match
+-- until both pointers meet, returns 'Nothing' if not found
 findPairWithSum :: Int        -- ^ Expected sum
                 -> Vector Int -- ^ Target vector
                 -> Maybe (Int, Int)
