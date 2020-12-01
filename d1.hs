@@ -16,8 +16,8 @@ main = do
 
 
 -- | Find a pair in a (sorted) list within a given range that adds up to 'expected'
--- by simply traversing simultaneously from both the given from and to index until
--- both pointers meet, returns 'Nothing' if not found.
+-- by simply traversing simultaneously from both the 'fromI' and 'toI' index to find
+-- a match until both pointers meet, returns 'Nothing' if not found.
 findPairWithSumFromTo :: Int        -- ^ Expected sum
                       -> Int        -- ^ From index
                       -> Int        -- ^ To index
@@ -41,8 +41,8 @@ findPairWithSumFromTo expected fromI toI xs = go fromI toI
     getVal = (V.!) xs
 
 -- | Find a pair in a (sorted) list that adds up to 'expected' by simply
--- traversing from both ends of the list until both pointers meet, returns
--- 'Nothing' if not found
+-- traversing from both ends of the list to find a match until both pointers
+-- meet, returns 'Nothing' if not found
 findPairWithSum :: Int -> Vector Int -> Maybe (Int, Int)
 findPairWithSum expected xs = findPairWithSumFromTo expected 0 (V.length xs - 1) xs
 
