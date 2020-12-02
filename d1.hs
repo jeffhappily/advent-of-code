@@ -12,12 +12,20 @@ main = do
   let numbers = V.fromList . sort . fmap (\x -> read x :: Int) $ words numbers'
 
   case part1 numbers of
-    Nothing -> putStrLn "Can't find :'("
-    Just (x, y) -> putStrLn $ "Found! The two number is " <> show x <> " & " <> show y <> ", and their product is " <> show (x * y)
+    Nothing -> error "Can't find :'("
+    Just (x, y) ->
+      putStrLn $
+        "Found! The two number is "
+        <> show x <> " & " <> show y
+        <> ", and their product is " <> show (x * y)
 
   case part2 numbers of
-    Nothing -> putStrLn "Can't find :'("
-    Just (x, y, z) -> putStrLn $ "Found! The three number is " <> show x <> " & " <> show y <>" & " <> show z <>  ", and their product is " <> show (x * y * z)
+    Nothing -> error "Can't find :'("
+    Just (x, y, z) ->
+      putStrLn $
+        "Found! The three number is "
+        <> show x <> " & " <> show y
+        <>" & " <> show z <>  ", and their product is " <> show (x * y * z)
 
 
 -- | Find a pair (two numbers) in a (sorted) list within a given range that

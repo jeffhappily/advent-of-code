@@ -10,7 +10,6 @@
 {-# LANGUAGE RecordWildCards #-}
 import Data.Attoparsec.Text
 import Data.Bits (xor)
-import qualified Data.List.Safe as LS
 import qualified Data.Text.IO as T (readFile)
 
 data Policy =
@@ -55,21 +54,21 @@ isValid Password {pwPolicy = Policy {..}, ..} = l >= pL && l <= pR
     l = length $ filter (== pChar) pwString
 
 isValid2 :: Password -> Bool
-isValid2 Password {pwPolicy = Policy {..}, ..} = (first == c) `xor` (second == c)
+isValid2 Password {pwPolicy = Policy {..}, ..} =
+  (first == pChar) `xor` (second == pChar)
   where
     -- Minus one because index starts from zero where given input starts from one
-    first = (LS.!!) pwString (pL - 1)
-    second = (LS.!!) pwString (pR - 1)
-    c = Just pChar
+    first = pwString !! (pL - 1)
+    second = pwString !! (pR - 1)
 
 main :: IO ()
 main = do
   content <- T.readFile "d2-input.txt"
   case parseOnly inputParser content of
-    Left err -> putStrLn $ "Error parsing: " <> err
+    Left err -> error $ "Error parsing: " <> err
     Right input ->
       let
         l1 = length $ filter isValid input
         l2 = length $ filter isValid2 input
-        s = "Part 1: " <> show l1 <> "\nPart 2: " <> show l2
-      in putStrLn s
+      in
+        putStrLn $ "Part 1: " <> show l1 <> "\nPart 2: " <> show l2
