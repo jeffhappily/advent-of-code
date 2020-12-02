@@ -1,3 +1,8 @@
+{- stack script
+    --resolver lts-16.10
+    --install-ghc
+    --ghc-options -Wall
+-}
 import Data.List
 import Data.Vector as V
 
