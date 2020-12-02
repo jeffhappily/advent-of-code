@@ -9,7 +9,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 import Data.Attoparsec.Text
-import Data.Bits (xor)
 import qualified Data.Text.IO as T (readFile)
 
 data Policy =
@@ -55,7 +54,7 @@ isValid Password {pwPolicy = Policy {..}, ..} = l >= pL && l <= pR
 
 isValid2 :: Password -> Bool
 isValid2 Password {pwPolicy = Policy {..}, ..} =
-  (first == pChar) `xor` (second == pChar)
+  (first == pChar) /= (second == pChar)
   where
     -- Minus one because index starts from zero where given input starts from one
     first = pwString !! (pL - 1)
