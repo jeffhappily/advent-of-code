@@ -48,7 +48,8 @@ inputParser :: Parser [Password]
 inputParser = many' $ passwordParser <* endOfLine
 
 isValid :: Password -> Bool
-isValid Password {pwPolicy = Policy {..}, ..} = l >= pL && l <= pR
+isValid Password {pwPolicy = Policy {..}, ..} =
+  l >= pL && l <= pR
   where
     l = length $ filter (== pChar) pwString
 
