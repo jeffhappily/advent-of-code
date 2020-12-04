@@ -10,9 +10,9 @@ data Space
   | Tree
   deriving Show
 
--- Check if current space is Tree
-encounteredTree :: Space -> Bool
-encounteredTree = \case
+-- | Check if current space is Tree
+isTree :: Space -> Bool
+isTree = \case
   OpenSquare -> False
   Tree -> True
 
@@ -49,7 +49,7 @@ solve :: [Row] -- ^ List of input role
       -> Int   -- ^ Down
       -> Int   -- ^ Number of tree encountered
 solve xs r d = length
-           . filter encounteredTree
+           . filter isTree
            . fmap (uncurry getCol)
            . every d
            . zip xs
@@ -67,5 +67,9 @@ main = do
                , (1, 2)
                ]
 
+  putStrLn "Part 1"
+  print $ solve rows 3 1
+
+  putStrLn "Part 2"
   print $
     product . fmap (uncurry $ solve rows) $ inputs
