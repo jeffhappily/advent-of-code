@@ -1,0 +1,74 @@
+cabal-version: 2.4
+name:          advent-of-code
+version:       0.1.0.0
+author:        Jeff Happily
+maintainer:    goodboy96@live.com.my
+
+common common-lang
+  ghc-options:
+    -Wall -Wcompat -Wincomplete-record-updates -Wmissing-export-lists
+    -Wincomplete-uni-patterns -Wredundant-constraints -Werror
+    -fplugin=RecordDotPreprocessor
+
+  build-depends:
+    , base                     ^>=4.14
+    , record-dot-preprocessor
+    , record-hasfield
+
+  default-extensions:
+    NoImplicitPrelude
+    BangPatterns
+    BinaryLiterals
+    ConstraintKinds
+    DataKinds
+    DeriveFunctor
+    DeriveGeneric
+    DeriveTraversable
+    DerivingStrategies
+    DerivingVia
+    DuplicateRecordFields
+    EmptyCase
+    FlexibleContexts
+    FlexibleInstances
+    GADTs
+    GeneralizedNewtypeDeriving
+    HexFloatLiterals
+    ImportQualifiedPost
+    InstanceSigs
+    KindSignatures
+    LambdaCase
+    MultiParamTypeClasses
+    NumericUnderscores
+    OverloadedStrings
+    ScopedTypeVariables
+    StandaloneDeriving
+    TupleSections
+    TypeApplications
+    TypeOperators
+    TypeSynonymInstances
+    UndecidableInstances
+
+  default-language:   Haskell2010
+
+executable advent-of-code
+  import:         common-lang
+  main-is:        Main.hs
+  hs-source-dirs: app
+  build-depends:  advent-of-code
+
+library
+  import:          common-lang
+  exposed-modules:
+    Day1
+    Day2
+    Day3
+    Day4
+
+  build-depends:
+    , attoparsec
+    , either
+    , listsafe
+    , text
+    , vector
+
+  hs-source-dirs:  src
