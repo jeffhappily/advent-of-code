@@ -58,10 +58,14 @@ executable y2021
 
 library
   import:          common-lang
-  exposed-modules: Day1
+  exposed-modules:
+    Day1
+    Day2
+
   build-depends:
     , attoparsec
     , either
+    , generic-data
     , listsafe
     , text
     , vector
