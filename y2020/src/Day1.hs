@@ -7,7 +7,7 @@ import Prelude
 
 main :: IO ()
 main = do
-  numbers' <- readFile "input/d1.txt"
+  numbers' <- readFile "y2020/input/d1.txt"
   let numbers = V.fromList . sort . fmap (\x -> read x :: Int) $ words numbers'
 
   case part1 numbers of

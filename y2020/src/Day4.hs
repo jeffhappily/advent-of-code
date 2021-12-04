@@ -177,7 +177,7 @@ inputParser = many1 (passportParser <* skipSpace)
 
 main :: IO ()
 main = do
-  content <- T.readFile "input/d4.txt"
+  content <- T.readFile "y2020/input/d4.txt"
   case parseOnly inputParser content of
     Left err -> error err
     Right p -> do

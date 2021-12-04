@@ -56,7 +56,7 @@ isValid2 Password{pwPolicy = Policy{..}, ..} =
 
 main :: IO ()
 main = do
-  content <- T.readFile "input/d2.txt"
+  content <- T.readFile "y2020/input/d2.txt"
   case parseOnly inputParser content of
     Left err -> error $ "Error parsing: " <> err
     Right input ->

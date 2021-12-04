@@ -64,7 +64,7 @@ solve xs r d =
 
 main :: IO ()
 main = do
-  content <- readFile "input/d3.txt"
+  content <- readFile "y2020/input/d3.txt"
 
   let rows = mkRow <$> lines content
   let inputs =
