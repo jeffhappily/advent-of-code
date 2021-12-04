@@ -1,5 +1,5 @@
 cabal-version: 2.4
-name:          y2021
+name:          discover
 version:       0.1.0.0
 author:        Jeff Happily
 maintainer:    goodboy96@live.com.my
@@ -50,25 +50,19 @@ common common-lang
 
   default-language:   Haskell2010
 
-executable y2021
+executable main-discover
   import:         common-lang
   main-is:        Main.hs
   hs-source-dirs: app
-  build-depends:  y2021
+  build-depends:  discover
 
 library
   import:          common-lang
-  exposed-modules:
-    Day1
-    Day2
-
+  exposed-modules: Lib
   build-depends:
-    , attoparsec
-    , either
-    , generic-data
-    , listsafe
-    , text
-    , vector
+    , filepath
+    , optparse-applicative
+    , path                  ^>=0.9
+    , path-io
 
   hs-source-dirs:  src
-  build-tools:     main-discover -any
