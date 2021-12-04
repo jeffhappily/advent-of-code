@@ -24,13 +24,6 @@ data Command
   | Down Int
   | Up Int
 
--- | Part 1
-commandToPosition :: Command -> Position
-commandToPosition = \case
-  Forward (Sum -> n) -> Position n mempty mempty
-  Down (Sum -> n) -> Position mempty n mempty
-  Up (Sum -> n) -> Position mempty (negate <$> n) mempty
-
 positionToAnswer :: Position -> Int
 positionToAnswer (Position (Sum x) (Sum y) _) = x * y
 
@@ -49,9 +42,14 @@ parseCommand = parseForward <|> parseDown <|> parseUp
 parseInput :: Parser [Command]
 parseInput = many' $ parseCommand <* endOfLine
 
-{- | Part 2
- commandToPosition' :: Command -> Position
--}
+-- | Part 1
+commandToPosition :: Command -> Position
+commandToPosition = \case
+  Forward (Sum -> n) -> Position n mempty mempty
+  Down (Sum -> n) -> Position mempty n mempty
+  Up (Sum -> n) -> Position mempty (negate <$> n) mempty
+
+-- | Part 2
 mergeCommand :: Position -> Command -> Position
 mergeCommand pos@(Position _ _ aim') c =
   let newPos = case c of
