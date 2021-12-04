@@ -27,17 +27,11 @@ data Command
 positionToAnswer :: Position -> Int
 positionToAnswer (Position (Sum x) (Sum y) _) = x * y
 
-parseForward :: Parser Command
-parseForward = Forward <$> (asciiCI "forward " >> decimal)
-
-parseDown :: Parser Command
-parseDown = Down <$> (asciiCI "down " >> decimal)
-
-parseUp :: Parser Command
-parseUp = Up <$> (asciiCI "up " >> decimal)
-
 parseCommand :: Parser Command
-parseCommand = parseForward <|> parseDown <|> parseUp
+parseCommand =
+  Forward <$> (asciiCI "forward " >> decimal)
+    <|> Down <$> (asciiCI "down " >> decimal)
+    <|> Up <$> (asciiCI "up " >> decimal)
 
 parseInput :: Parser [Command]
 parseInput = many' $ parseCommand <* endOfLine
