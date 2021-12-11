@@ -2,6 +2,24 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TemplateHaskell #-}
 
+-- | A prepocessor that retrives all modules (non-recursively) from `src/` (that
+-- are supopsed to export a 'main' function of type 'IO ()') and  write to the
+-- destination files a 'main' function that runs all of the 'main's from the
+-- modules.
+--
+-- Given the following folder structure
+--
+-- > |-- src
+-- > |   |-- Day1.hs
+-- > |   |-- Day2.hs
+-- > |   `-- Day3.hs
+--
+-- This will be generated
+--
+-- 
+--
+-- Source code is mainly from [sydtest-discover](https://github.com/NorfairKing/sydtest/blob/5b0eee208753e3554d9b158a6e48b1760514aed0/sydtest-discover/src/Test/Syd/Discover.hs).
+
 module Lib (mainDiscover) where
 
 import Control.Monad.IO.Class (MonadIO)
