@@ -1,0 +1,98 @@
+cabal-version: 3.0
+name:          advent-of-code
+version:       0.1.0.0
+author:        Jeff Happily
+maintainer:    goodboy96@live.com.my
+
+common common-lang
+  ghc-options:
+    -Wall -Wcompat -Wincomplete-record-updates -Wmissing-export-lists
+    -Wincomplete-uni-patterns -Wredundant-constraints
+
+  --  -Werror
+
+  build-depends:
+    , base       >=4.14 && <4.18
+    , directory
+    , filepath
+    , text
+
+  default-extensions:
+    DeriveGeneric
+    DerivingStrategies
+    DerivingVia
+    ImportQualifiedPost
+    LambdaCase
+    OverloadedRecordDot
+    OverloadedStrings
+
+  -- NoImplicitPrelude
+  -- BangPatterns
+  -- BinaryLiterals
+  -- ConstraintKinds
+  -- DataKinds
+  -- DeriveFunctor
+  -- DeriveTraversable
+  -- DuplicateRecordFields
+  -- EmptyCase
+  -- FlexibleContexts
+  -- FlexibleInstances
+  -- GADTs
+  -- GeneralizedNewtypeDeriving
+  -- HexFloatLiterals
+  -- InstanceSigs
+  -- KindSignatures
+  -- MultiParamTypeClasses
+  -- NumericUnderscores
+  -- ScopedTypeVariables
+  -- StandaloneDeriving
+  -- TupleSections
+  -- TypeApplications
+  -- TypeOperators
+  -- TypeSynonymInstances
+  -- UndecidableInstances
+
+  default-language:   Haskell2010
+
+executable aoc
+  import:             common-lang
+  main-is:            Main.hs
+  hs-source-dirs:     app
+  build-depends:
+    , advent-of-code
+    , optparse-applicative
+
+  build-tool-depends: advent-of-code:auto-import
+
+executable auto-import
+  import:        common-lang
+  main-is:       auto-import.hs
+  build-depends: optparse-applicative
+
+library
+  import:          common-lang
+  exposed-modules:
+    Helper
+    Year2020.Day1.Part1
+    Year2020.Day1.Part2
+    Year2020.Day2.Part1
+    Year2020.Day2.Part2
+    Year2020.Day3.Part1
+    Year2020.Day3.Part2
+    Year2020.Day4.Part1
+    Year2020.Day4.Part2
+    Year2021.Day1.Part1
+    Year2021.Day1.Part2
+    Year2021.Day2.Part1
+    Year2021.Day2.Part2
+    Year2021.Day3.Part1
+
+  build-depends:
+    , attoparsec
+    , either
+    , generic-data
+    , listsafe
+    , text
+    , vector
+
+  hs-source-dirs:  src
