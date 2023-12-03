@@ -86,6 +86,7 @@ library
     Year2021.Day2.Part1
     Year2021.Day2.Part2
     Year2021.Day3.Part1
+    Year2023.Day1.Part1
 
   build-depends:
     , attoparsec
