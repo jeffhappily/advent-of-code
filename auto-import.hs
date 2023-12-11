@@ -1,13 +1,20 @@
 import Control.Monad
-import Data.List
-import Options.Applicative
-import System.Directory
-import System.FilePath
+import Data.List (isSuffixOf)
+import Options.Applicative (
+  Parser,
+  execParser,
+  fullDesc,
+  help,
+  info,
+  strArgument,
+ )
+import System.Directory (doesDirectoryExist, listDirectory)
+import System.FilePath (takeBaseName, (</>))
 
 data Arguments = Arguments
-  { argSource :: FilePath,
-    argIgnored :: FilePath,
-    argDestination :: FilePath
+  { argSource :: FilePath
+  , argIgnored :: FilePath
+  , argDestination :: FilePath
   }
   deriving (Show, Eq)
 
@@ -76,10 +83,12 @@ partNumber _ = "0" -- Default case
 
 generateFileContent :: String -> String -> String
 generateFileContent imports cases =
-  "module Main where\n\n"
+  "module Main (main) where\n\n"
     ++ imports
     ++ "\n"
-    ++ "import qualified Data.Text.IO as TIO\n"
+    ++ "import Data.Text.IO qualified as TIO\n"
+    ++ "import System.FilePath ((</>))\n"
+    ++ "import Paths_advent_of_code qualified as Paths\n"
     ++ "import Options.Applicative\n\n"
     ++ "data Command = Command\n"
     ++ "  { year :: Int\n"
@@ -92,10 +101,10 @@ generateFileContent imports cases =
     ++ "  <*> option auto (long \"day\" <> help \"Day of the challenge\")\n"
     ++ "  <*> option auto (long \"part\" <> help \"Part of the challenge\")\n\n"
     ++ "runCommand :: Command -> IO ()\n"
-    ++ "runCommand (Command year day part) = do\n"
-    ++ "  let inputFilePath = \"input/\" ++ show year ++ \"/d\" ++ show day ++ \".txt\"\n"
+    ++ "runCommand (Command year' day' part') = do\n"
+    ++ "  inputFilePath <- Paths.getDataFileName $ \"input\" </> show year' </> \"d\" ++ show day' ++ \".txt\"\n"
     ++ "  input <- TIO.readFile inputFilePath\n"
-    ++ "  case (year, day, part) of\n"
+    ++ "  case (year', day', part') of\n"
     ++ cases
     ++ "    _ -> putStrLn \"Challenge not found\"\n\n"
     ++ "main :: IO ()\n"

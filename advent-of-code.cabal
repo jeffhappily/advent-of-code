@@ -3,6 +3,15 @@ name:          advent-of-code
 version:       0.1.0.0
 author:        Jeff Happily
 maintainer:    goodboy96@live.com.my
+data-files:
+  input/2020/day1.txt
+  input/2020/day2.txt
+  input/2020/day3.txt
+  input/2020/day4.txt
+  input/2021/day1.txt
+  input/2021/day2.txt
+  input/2021/day3.txt
+  input/2023/day1.txt
 
 common common-lang
   ghc-options:
@@ -63,6 +72,8 @@ executable aoc
     , optparse-applicative
 
   build-tool-depends: advent-of-code:auto-import
+  other-modules:      Paths_advent_of_code
+  autogen-modules:    Paths_advent_of_code
 
 executable auto-import
   import:        common-lang
